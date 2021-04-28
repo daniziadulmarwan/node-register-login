@@ -1,0 +1,58 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <!-- START: Button Modal -->
+    <button
+      type="button"
+      class="btn btn-primary btn-sm"
+      data-toggle="modal"
+      data-target="#blogModal"
+    >
+      <i class="fas fa-plus"></i>
+    </button>
+    <!-- END: Button Modal -->
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table
+        class="table table-bordered"
+        id="dataTable"
+        width="100%"
+        cellspacing="0"
+      >
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < b.length; i++) { %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= b[i].title %></td>
+            <td><%= b[i].author %></td>
+            <td><%= b[i].text %></td>
+            <td>
+              <img
+                src="http://localhost:3000/<%= b[i].image %>"
+                alt="blog-image"
+                style="width: 60px"
+              />
+            </td>
+            <td>
+              <a href="#" class="btn btn-danger btn-sm"
+                ><i class="fas fa-trash"></i
+              ></a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

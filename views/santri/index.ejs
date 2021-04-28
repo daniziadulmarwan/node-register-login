@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/sbadm/css/sb-admin-2.min.css" rel="stylesheet" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mt-5">
+          <h4>Daftar Santri</h4>
+          <div class="my-4">
+            <!-- START: Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Add Data
+            </button>
+            <!-- START: Button trigger modal -->
+
+            <!-- START: Button trigger xlsx -->
+            <button
+              type="button"
+              class="btn btn-success"
+              data-toggle="modal"
+              data-target="#xlsxModal"
+            >
+              Import Data
+            </button>
+            <!-- START: Button trigger xlsx -->
+
+            <!-- START: Button export xlsx -->
+            <a
+              href="/santri/export"
+              type="button"
+              class="btn btn-info"
+            >
+              Export Data
+            </a>
+            <!-- START: Button export xlsx -->
+
+          </div>
+          <!-- START: Flash Message -->
+          <% if(alert.message != '') { %>
+            <% for(let i=0;i<alert.message.length;i++) { %> 
+          <div class="alert alert-<%= alert.status %>" role="alert">
+            <strong>Holy guacamole!</strong> <%= alert.message[i] %>
+          </div>
+          <% } %> 
+          <% } %>
+          <!-- START: Flash Message -->
+
+          <!-- START: Search -->
+          <!-- <form action="/santri" >
+            <div class="input-group mb-4">
+              <input type="text" class="form-control" id="cari" name="keyword" placeholder="Cari..." >
+              <div class="input-group-append">
+                <button class="btn btn-success" type="submit" >Search</button>
+              </div>
+            </div>
+          </form> -->
+          <!-- END: Search -->
+
+          <!-- START: Pagination -->
+          <div class="pagination mx-3">
+
+            <% if(halamanAktif > 1) { %> 
+            <a href="?halaman=<%= Number(halamanAktif) - 1 %>" class="mr-2">&laquo;</a>
+            <% } else { %> 
+              <a href="" class="mr-2">&laquo;</a>
+            <% } %> 
+
+            <% for(let i = 1; i <= jumlahHalaman; i++) { %>
+              <% if(i == halamanAktif) { %> 
+              <a href="?halaman=<%= i %>" class="mr-2"><strong><%= i %></strong></a>
+              <% } else { %>
+                <a href="?halaman=<%= i %>" class="mr-2"><%= i %></a>
+              <% } %>  
+            <% } %> 
+
+            <% if(halamanAktif < jumlahHalaman) { %> 
+              <a href="?halaman=<%= Number(halamanAktif) + 1 %>" class="mr-2">&raquo;</a>
+              <% } else { %> 
+                <a href="" class="mr-2">&raquo;</a>
+              <% } %> 
+
+          </div>
+          <!-- END: Pagination -->
+
+          <!-- START: Load Data -->
+          <div class="contain">
+            <ul>
+              <% for( let i = 0; i < santri.length; i++ ) { %>
+              <li><%= santri[i].name %> <span class="mr-auto"><a style="cursor: pointer;" class="badge badge-danger" onclick="hapus_santri(`<%= santri[i].id %>`)">delete</a></span></li>
+              <% } %>
+            </ul>
+          </div>
+          <!-- END: Load Data -->
+
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/sbadm/vendor/jquery/jquery.min.js"></script>
+    <script src="/sbadm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/sbadm/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/sbadm/js/sb-admin-2.min.js"></script>
+    <% include add-modal.ejs %>
+    <% include add-excel.ejs %> 
+    <script>
+      function hapus_santri(id) {
+            document.location.assign(`/santri/delete/${id}`);
+      }
+    </script>
+  </body>
+</html>

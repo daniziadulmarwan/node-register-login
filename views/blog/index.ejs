@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Custom fonts for this template -->
+    <link href="/sbadm/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this page -->
+    <link href="/sbadm/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <link href="/sbadm/css/sb-admin-2.min.css" rel="stylesheet" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mt-5">
+          <h2>Blog Table</h2>
+        </div>
+        <div class="col-md-5">
+          <!-- START: Flash Message -->
+          <% if(alert.message != '') { %>
+            <% for(let i=0;i<alert.message.length;i++) { %> 
+          <div class="alert alert-<%= alert.status %>" role="alert">
+            <strong><%= alert.status %> !</strong> <%= alert.message[i] %>
+          </div>
+          <% } %> 
+          <% } %>
+          <!-- START: Flash Message -->
+        </div>
+        <div class="col-md-12">
+          <!-- START: Blog Table -->
+          <%- include('blog-table.ejs') %> 
+          <!-- END: Blog Table -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/sbadm/vendor/jquery/jquery.min.js"></script>
+    <script src="/sbadm/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/sbadm/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/sbadm/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="/sbadm/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/sbadm/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/sbadm/js/demo/datatables-demo.js"></script>
+
+    <% include blog-add-modal.ejs %>
+  </body>
+</html>
